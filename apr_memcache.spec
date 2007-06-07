@@ -4,7 +4,7 @@
 Summary:	A client for memcached 
 Name:		apr_memcache
 Version:	0.7.0
-Release:	%mkrel 8
+Release:	%mkrel 9
 License:	Apache License
 Group:          System/Libraries
 URL:		http://www.outoforder.cc/projects/libs/apr_memcache/
@@ -50,6 +50,12 @@ This package contains development files for %{name}.
 %setup -q
 
 %build
+%if %mdkversion >= 200710
+export CFLAGS="%{optflags} -fstack-protector"
+export CXXFLAGS="%{optflags} -fstack-protector"
+export FFLAGS="%{optflags} -fstack-protector"
+%endif
+
 #export WANT_AUTOCONF_2_5=1
 #rm -f configure
 #libtoolize --force --copy && aclocal-1.7 -I m4 && autoheader && automake-1.7 --add-missing --copy --foreign && autoconf
@@ -106,5 +112,3 @@ sh ./autogen.sh
 %{_includedir}/apr_memcache-%{major}/*
 %{_libdir}/lib*.*a
 %{_libdir}/lib*.so
-
-
