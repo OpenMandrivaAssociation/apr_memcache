@@ -1,14 +1,16 @@
 %define major 0
 %define libname	%mklibname %{name} %{major}
+%define develname %mklibname -d %{name}
 
 Summary:	A client for memcached 
 Name:		apr_memcache
 Version:	0.7.0
-Release:	%mkrel 10
+Release:	%mkrel 11
 License:	Apache License
 Group:          System/Libraries
 URL:		http://www.outoforder.cc/projects/libs/apr_memcache/
 Source0:	http://www.outoforder.cc/downloads/apr_memcache/%{name}-%{version}.tar.bz2
+Patch0:		apr_memcache-from_apr-util_HEAD.diff
 BuildRequires:	autoconf2.5
 BuildRequires:	automake1.9
 BuildRequires:	libtool
@@ -30,15 +32,16 @@ apr_memcache is a client for memcached written in C, using APR and APR-Util. It
 provides pooled client connections and is thread safe, making it perfect for
 use inside Apache Modules. 
 
-%package -n	%{libname}-devel
+%package -n	%{develname}
 Summary:	Development files for %{name}
 Group:		Development/C
 Requires:	%{libname} = %{version}
-Provides:	lib%{name}-devel = %{version}
 Provides:	%{name}-devel = %{version}
-Obsoletes:	lib%{name}-devel %{name}-devel
+Provides:	%{libname}-devel = %{version}-%{release}
+Obsoletes:	%{name}-devel
+Obsoletes:	%{libname}-devel
 
-%description -n	%{libname}-devel
+%description -n	%{develname}
 apr_memcache is a client for memcached written in C, using APR and APR-Util. It
 provides pooled client connections and is thread safe, making it perfect for
 use inside Apache Modules.
@@ -48,6 +51,7 @@ This package contains development files for %{name}.
 %prep
 
 %setup -q
+%patch0 -p1
 
 %build
 %serverbuild
@@ -102,7 +106,7 @@ sh ./autogen.sh
 %doc LICENSE NOTICE test
 %{_libdir}/lib*.so.*
 
-%files -n %{libname}-devel
+%files -n %{develname}
 %defattr(-,root,root,-)
 %dir %{_includedir}/apr_memcache-%{major}
 %{_includedir}/apr_memcache-%{major}/*
