@@ -16,6 +16,7 @@ BuildRequires:	automake1.9
 BuildRequires:	libtool
 BuildRequires:	apr-devel >= 1.2.2
 BuildRequires:	apr-util-devel >= 1.2.2
+BuildRoot:	%{_tmppath}/%{name}-%{version}
 
 %description
 apr_memcache is a client for memcached written in C, using APR and APR-Util. It
