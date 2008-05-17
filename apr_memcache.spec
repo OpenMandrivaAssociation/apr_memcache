@@ -5,7 +5,7 @@
 Summary:	A client for memcached 
 Name:		apr_memcache
 Version:	0.7.0
-Release:	%mkrel 11
+Release:	%mkrel 12
 License:	Apache License
 Group:          System/Libraries
 URL:		http://www.outoforder.cc/projects/libs/apr_memcache/
@@ -16,7 +16,7 @@ BuildRequires:	automake1.9
 BuildRequires:	libtool
 BuildRequires:	apr-devel >= 1.2.2
 BuildRequires:	apr-util-devel >= 1.2.2
-BuildRoot:	%{_tmppath}/%{name}-%{version}
+BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-buildroot
 
 %description
 apr_memcache is a client for memcached written in C, using APR and APR-Util. It
@@ -37,9 +37,9 @@ Summary:	Development files for %{name}
 Group:		Development/C
 Requires:	%{libname} = %{version}
 Provides:	%{name}-devel = %{version}
-Provides:	%{libname}-devel = %{version}-%{release}
+Provides:	%{mklibname apr_memcache -d 0} = %{version}-%{release}
 Obsoletes:	%{name}-devel
-Obsoletes:	%{libname}-devel
+Obsoletes:	%{mklibname apr_memcache -d 0}
 
 %description -n	%{develname}
 apr_memcache is a client for memcached written in C, using APR and APR-Util. It
@@ -90,7 +90,7 @@ sh ./autogen.sh
 %make
 
 %install
-[ "%{buildroot}" != "/" ] && rm -rf %{buildroot}
+rm -rf %{buildroot}
 
 %makeinstall_std
 
@@ -99,7 +99,7 @@ sh ./autogen.sh
 %postun -n %{libname} -p /sbin/ldconfig
 
 %clean
-[ "%{buildroot}" != "/" ] && rm -rf %{buildroot}
+rm -rf %{buildroot}
 
 %files -n %{libname}
 %defattr(-,root,root,-)
