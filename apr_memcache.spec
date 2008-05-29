@@ -5,7 +5,7 @@
 Summary:	A client for memcached 
 Name:		apr_memcache
 Version:	0.7.0
-Release:	%mkrel 12
+Release:	%mkrel 13
 License:	Apache License
 Group:          System/Libraries
 URL:		http://www.outoforder.cc/projects/libs/apr_memcache/
@@ -57,16 +57,18 @@ This package contains development files for %{name}.
 %serverbuild
 
 #export WANT_AUTOCONF_2_5=1
-#rm -f configure
-#libtoolize --force --copy && aclocal-1.7 -I m4 && autoheader && automake-1.7 --add-missing --copy --foreign && autoconf
+rm -f configure
+libtoolize --copy --force; aclocal -I m4; autoheader; automake --add-missing --copy --foreign; autoconf
 
-sh ./autogen.sh
+#sh ./autogen.sh
 
 #%%configure2_5x \
 #    --enable-shared \
 #    --enable-static \	      
 #    --with-apr=%{_bindir}/apr-config \
 #    --with-apr-util=%{_bindir}/apu-config
+
+export LDFLAGS="-Wl,--as-needed -Wl,--no-undefined"
 
 ./configure \
     --prefix=%{_prefix} \
