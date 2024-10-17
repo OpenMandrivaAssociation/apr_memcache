@@ -8,7 +8,7 @@ Version:	0.7.0
 Release:	%mkrel 17
 License:	Apache License
 Group:          System/Libraries
-URL:		http://www.outoforder.cc/projects/libs/apr_memcache/
+URL:		https://www.outoforder.cc/projects/libs/apr_memcache/
 Source0:	http://www.outoforder.cc/downloads/apr_memcache/%{name}-%{version}.tar.bz2
 Patch0:		apr_memcache-from_apr-util_HEAD.diff
 BuildRequires:	autoconf2.5
