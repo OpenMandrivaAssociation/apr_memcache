@@ -11,6 +11,8 @@ Group:          System/Libraries
 URL:		https://www.outoforder.cc/projects/libs/apr_memcache/
 Source0:	http://www.outoforder.cc/downloads/apr_memcache/%{name}-%{version}.tar.bz2
 Patch0:		apr_memcache-from_apr-util_HEAD.diff
+BuildRequires:	libtool-base
+BuildRequires:	slibtool
 BuildRequires:	autoconf2.5
 BuildRequires:	automake1.9
 BuildRequires:	libtool
